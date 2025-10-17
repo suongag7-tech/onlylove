@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Love Loading ❤️</title>
+<title>Gửi đến chị bé 💌</title>
 <style>
+    * {
+        box-sizing: border-box;
+    }
     body {
         margin: 0;
         font-family: 'Comic Sans MS', cursive;
@@ -15,48 +18,25 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
+        text-align: center;
     }
 
-    /* Background Animations */
-    .falling-letter {
-        position: fixed;
-        top: -50px;
-        font-size: 24px;
-        opacity: 0.9;
-        animation: fall linear forwards;
-    }
-
-    @keyframes fall {
-        to {
-            transform: translateY(110vh) rotate(360deg);
-            opacity: 0;
-        }
-    }
-
-    /* Moving Car */
-    #car {
-        position: fixed;
-        bottom: 10px;
-        left: -200px;
-        width: 150px;
-        animation: drive 10s linear infinite;
-        z-index: 2;
-    }
-
-    @keyframes drive {
-        from { left: -200px; }
-        to { left: 110vw; }
-    }
+    /* Responsive font */
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.2rem; }
+    #message { font-size: 1rem; }
 
     /* Loading Screen */
     #loading {
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         animation: fadeIn 1s ease;
-        z-index: 3;
     }
 
     .heart {
-        font-size: 80px;
+        font-size: 60px;
         animation: heartbeat 1s infinite;
     }
 
@@ -66,8 +46,9 @@
     }
 
     .progress-container {
-        width: 300px;
-        height: 20px;
+        width: 80%;
+        max-width: 300px;
+        height: 18px;
         background-color: #ffd1dc;
         border-radius: 10px;
         margin: 20px auto;
@@ -86,12 +67,13 @@
     #letter {
         display: none;
         text-align: center;
+        width: 90%;
         max-width: 600px;
         padding: 20px;
         line-height: 1.6;
         animation: fadeIn 2s ease;
         z-index: 3;
-        background-color: rgba(255,255,255,0.6);
+        background-color: rgba(255,255,255,0.7);
         border-radius: 20px;
         box-shadow: 0 0 15px rgba(255, 51, 102, 0.3);
     }
@@ -102,7 +84,6 @@
     }
 
     #message {
-        font-size: 1.2em;
         white-space: pre-wrap;
         border-right: 2px solid #ff3366;
         animation: blinkCursor 0.8s infinite;
@@ -111,6 +92,55 @@
     @keyframes blinkCursor {
         0%, 100% { border-color: transparent; }
         50% { border-color: #ff3366; }
+    }
+
+    /* Background animations */
+    .falling-letter {
+        position: fixed;
+        top: -50px;
+        font-size: 22px;
+        opacity: 0.9;
+        animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(110vh) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    /* Moving Car */
+    #car {
+        position: fixed;
+        bottom: 5px;
+        left: -180px;
+        width: 120px;
+        animation: drive 12s linear infinite;
+        z-index: 1;
+    }
+
+    @keyframes drive {
+        from { left: -200px; }
+        to { left: 110vw; }
+    }
+
+    /* Button */
+    #startBtn {
+        background-color: #ff6699;
+        border: none;
+        color: white;
+        padding: 10px 25px;
+        border-radius: 25px;
+        font-size: 1rem;
+        margin-top: 20px;
+        box-shadow: 0 0 10px rgba(255, 102, 153, 0.4);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    #startBtn:hover {
+        background-color: #ff3366;
+        transform: scale(1.05);
     }
 
     audio {
@@ -126,37 +156,40 @@
 <!-- Loading Screen -->
 <div id="loading">
     <div class="heart">💗</div>
-    <h2>Đang nạp năng lượng...</h2>
+    <h2>Đang nạp năng lượng yêu thương...</h2>
     <div class="progress-container">
         <div class="progress-bar" id="progress-bar"></div>
     </div>
+    <button id="startBtn">Bắt đầu 💞</button>
 </div>
 
 <!-- Letter Screen -->
 <div id="letter">
     <audio id="bg-music" src="love-song.mp3"></audio>
-    <h1>Gửi đến người đặc biệt 💌</h1>
+    <h1>Gửi đến chị bé 💌</h1>
     <div id="message"></div>
 </div>
 
 <script>
-    // Loading simulation
-    let progress = 0;
     const progressBar = document.getElementById('progress-bar');
     const loadingScreen = document.getElementById('loading');
     const letterScreen = document.getElementById('letter');
     const audio = document.getElementById('bg-music');
+    const startBtn = document.getElementById('startBtn');
 
-    const loadingInterval = setInterval(() => {
-        progress += 2;
-        progressBar.style.width = progress + '%';
-        if (progress >= 100) {
-            clearInterval(loadingInterval);
-            setTimeout(showLetter, 500);
-        }
-    }, 100);
+    startBtn.addEventListener('click', () => {
+        startBtn.style.display = 'none';
+        let progress = 0;
+        const loadingInterval = setInterval(() => {
+            progress += 3;
+            progressBar.style.width = progress + '%';
+            if (progress >= 100) {
+                clearInterval(loadingInterval);
+                setTimeout(showLetter, 500);
+            }
+        }, 100);
+    });
 
-    // Show letter after loading
     function showLetter() {
         loadingScreen.style.display = 'none';
         letterScreen.style.display = 'block';
@@ -185,7 +218,7 @@ Hãy luôn nhớ rằng chị không một mình có bé ở đây bầu bạn v
         if (i < message.length) {
             document.getElementById("message").innerHTML += message.charAt(i);
             i++;
-            setTimeout(typeWriter, 50);
+            setTimeout(typeWriter, 45);
         }
     }
 
@@ -198,11 +231,8 @@ Hãy luôn nhớ rằng chị không một mình có bé ở đây bầu bạn v
             letter.style.left = Math.random() * 100 + 'vw';
             letter.style.animationDuration = 4 + Math.random() * 4 + 's';
             document.body.appendChild(letter);
-
-            setTimeout(() => {
-                letter.remove();
-            }, 8000);
-        }, 500);
+            setTimeout(() => letter.remove(), 8000);
+        }, 600);
     }
 </script>
 
